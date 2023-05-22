@@ -120,9 +120,11 @@ class Index
 
     public function post_article(Base $f3, array $params): void
     {
-        header('Access-Control-Allow-Origin: *');
-//        header('Access-Control-Allow-Methods: *');
-//        header('Access-Control-Allow-Headers: *');
+        $response = $f3->response();
+        $response->header('Access-Control-Allow-Origin', '*');
+        $response->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $response->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
         $json_data = $f3->get('BODY');
         $data = json_decode($json_data, true);
 
