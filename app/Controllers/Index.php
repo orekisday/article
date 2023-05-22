@@ -146,6 +146,7 @@ class Index
         echo json_encode($f3->get('response'));
     }
     public function email(Base $f3, array $params): void {
+        header('Access-Control-Allow-Origin: *');
         $to = 'cutesytee@gmail.com';
         $subject = 'Hello from PHP';
         $message = 'This is a test email';
