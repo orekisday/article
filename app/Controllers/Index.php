@@ -50,11 +50,15 @@ class Index
         }
     }
 
-    public function get_user(Base $f3, array $params): void
+    public function get_article(Base $f3, array $params): void
     {
         header('Access-Control-Allow-Origin: *');
-        $name = $params['name'];
-        $result = $f3->get('db')->exec('SELECT `first_name` FROM `articles` WHERE `first_name` = ?', $name);
+        $json_data = $f3->get('BODY');
+        $data = json_decode($json_data, true);
+
+        $email = $data['email'];
+
+        $result = $f3->get('db')->exec('SELECT `article` FROM `articles` WHERE `email` = ?', $email);
 
         if (count($result) > 0) {
             echo json_encode($result);
@@ -78,26 +82,41 @@ class Index
 //            $f3->error(404);
 //        }
 //    }
-
     public function get_article_info(Base $f3, array $params): void
     {
         header('Access-Control-Allow-Origin: *');
-        $first_name = $params['name'];
-        $data_set = new SQL\Mapper($this->db, 'articles');
+        $json_data = $f3->get('BODY');
+        $data = json_decode($json_data, true);
 
-        if (!empty($data_set->load(array('first_name=?', $first_name)))) {
-            $first_name = $data_set->first_name;
-            $email = $data_set->email;
-            $last_name = $data_set->last_name;
-            $text = $data_set->article;
-            echo json_encode($first_name) . '<br>';
-            echo json_encode($last_name) . '<br>';
-            echo json_encode($email) . '<br>';
-            echo json_encode($text);
+        $email = $data['email'];
+
+        $result = $f3->get('db')->exec('SELECT * FROM `articles` WHERE `email` = ?', $email);
+
+        if (count($result) > 0) {
+            echo json_encode($result);
         } else {
             $f3->error(404);
         }
     }
+//    public function get_article_info_test(Base $f3, array $params): void
+//    {
+//        header('Access-Control-Allow-Origin: *');
+//        $first_name = $params['name'];
+//        $data_set = new SQL\Mapper($this->db, 'articles');
+//
+//        if (!empty($data_set->load(array('first_name=?', $first_name)))) {
+//            $first_name = $data_set->first_name;
+//            $email = $data_set->email;
+//            $last_name = $data_set->last_name;
+//            $text = $data_set->article;
+//            echo json_encode($first_name) . '<br>';
+//            echo json_encode($last_name) . '<br>';
+//            echo json_encode($email) . '<br>';
+//            echo json_encode($text);
+//        } else {
+//            $f3->error(404);
+//        }
+//    }
 
     public function post_article(Base $f3, array $params): void
     {

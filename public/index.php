@@ -9,11 +9,11 @@ $f3->route('GET /users', 'Controllers\Index->get_all_users');
 
 $f3->route('GET /email', 'Controllers\Index->email');
 
-$f3->route('GET /user/@name', 'Controllers\Index->get_user');
+$f3->route('GET /user', 'Controllers\Index->get_article');
 
 //$f3->route('POST /name', 'Controllers\Index->get_user_test');
 
-$f3->route('GET /article/@name', 'Controllers\Index->get_article_info');
+$f3->route('GET /article', 'Controllers\Index->get_article_info');
 
 /*** POST ***/
 $f3->route('POST /post/article', 'Controllers\Index->post_article');
