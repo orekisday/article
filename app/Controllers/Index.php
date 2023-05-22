@@ -42,7 +42,7 @@ class Index
     {
         header('Access-Control-Allow-Origin: *');
         $first_name = $f3->get('db')->exec('SELECT `first_name` FROM `articles`');
-        $last_name = $f3->get('db')->exec('SELECT `last_name` FROM `articles`');
+//        $last_name = $f3->get('db')->exec('SELECT `last_name` FROM `articles`');
         if (count($first_name) > 0) {
             echo json_encode($first_name);
         } else {
