@@ -121,8 +121,8 @@ class Index
     public function post_article(Base $f3, array $params): void
     {
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: *');
-        header('Access-Control-Allow-Headers: *');
+//        header('Access-Control-Allow-Methods: *');
+//        header('Access-Control-Allow-Headers: *');
         $json_data = $f3->get('BODY');
         $data = json_decode($json_data, true);
 
